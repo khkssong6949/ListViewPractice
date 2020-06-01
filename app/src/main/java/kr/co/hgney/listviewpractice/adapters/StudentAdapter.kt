@@ -25,9 +25,19 @@ class StudentAdapter(context: Context, resId: Int, list: List<Student>) : ArrayA
 
         val nameAndAgeTxt = row.findViewById<TextView>(R.id.nameAndAgeTxt)
         val genderTxt = row.findViewById<TextView>(R.id.genderTxt)
-        val data = mList.get(position)
 
-        nameAndAgeTxt.text = data.name
+        val data = mList.get(position)
+        val mAge = 2020 - data.birthYear +1
+
+        nameAndAgeTxt.text = data.name + mAge
+
+
+        if(data.isMale){
+            genderTxt.text = "남성"
+        }
+        else{
+            genderTxt.text = "여성"
+        }
 
         return row
     }
