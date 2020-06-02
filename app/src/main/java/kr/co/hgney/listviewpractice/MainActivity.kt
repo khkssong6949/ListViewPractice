@@ -2,6 +2,7 @@ package kr.co.hgney.listviewpractice
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kr.co.hgney.listviewpractice.adapters.StudentAdapter
 import kr.co.hgney.listviewpractice.datas.Student
@@ -19,6 +20,22 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+
+        studentListView.setOnItemClickListener { parent, view, position, id ->
+
+            val clickedStudent = students.get(position)
+            Toast.makeText(mContext, clickedStudent.name, Toast.LENGTH_SHORT).show()
+        }
+
+        studentListView.setOnItemLongClickListener { parent, view, position, id ->
+
+            val clickedStudent = students[position]
+
+            Toast.makeText(mContext, "${clickedStudent.name}을 오래 누름", Toast.LENGTH_LONG).show()
+
+           return@setOnItemLongClickListener true
+        }
+
     }
 
     override fun setValues() {
