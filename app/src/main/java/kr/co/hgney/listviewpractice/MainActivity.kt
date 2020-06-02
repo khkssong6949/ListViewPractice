@@ -1,8 +1,10 @@
 package kr.co.hgney.listviewpractice
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_main.*
 import kr.co.hgney.listviewpractice.adapters.StudentAdapter
 import kr.co.hgney.listviewpractice.datas.Student
@@ -29,9 +31,20 @@ class MainActivity : BaseActivity() {
 
         studentListView.setOnItemLongClickListener { parent, view, position, id ->
 
-            val clickedStudent = students[position]
+//            val clickedStudent = students[position]
+//            Toast.makeText(mContext, "${clickedStudent.name}을 오래 누름", Toast.LENGTH_LONG).show()
+            val alert = AlertDialog.Builder(mContext)
+            alert.setTitle("삭제 확인")
+            alert.setMessage("정말 이 학생을 삭제하시겠습니까?")
+            alert.setPositiveButton("확인", DialogInterface.OnClickListener { dialog, which ->
 
-            Toast.makeText(mContext, "${clickedStudent.name}을 오래 누름", Toast.LENGTH_LONG).show()
+                students.removeAt(position)
+                studentAdapter.notifyDataSetChanged()
+
+
+            })
+            alert.setNegativeButton("취소", null)
+            alert.show()
 
            return@setOnItemLongClickListener true
         }
