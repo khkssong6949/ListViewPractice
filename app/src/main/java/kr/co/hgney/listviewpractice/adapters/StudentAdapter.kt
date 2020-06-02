@@ -29,7 +29,7 @@ class StudentAdapter(context: Context, resId: Int, list: List<Student>) : ArrayA
         val data = mList.get(position)
         val mAge = 2020 - data.birthYear +1
 
-        nameAndAgeTxt.text = data.name + mAge
+        nameAndAgeTxt.text = "${data.name}(${data.getKoreanAge(2020)}세)"
 
 
         if(data.isMale){
